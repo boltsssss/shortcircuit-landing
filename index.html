@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShortCircuit — Venture Studio</title>
+  <meta name="description" content="ShortCircuit is a venture studio building at the frontier of AI agents, tokenization, and the ownership economy.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:  #F0EEE9;
+      --black:  #0d0d0d;
+      --orange: #F97316;
+      --arc:    #FDBA74;
+      --mid:    #999;
+      --dim:    #ccc;
+      --rule:   rgba(13,13,13,0.08);
+      --rule-d: rgba(240,238,233,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--black);
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─────────────────────────────────────────
+       WORDMARK
+    ───────────────────────────────────────── */
+    .wordmark {
+      display: inline-flex;
+      align-items: center;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: -0.01em;
+      line-height: 1;
+      text-decoration: none;
+    }
+    .wordmark.on-dark { color: var(--cream); }
+
+    .wm-spark {
+      display: flex;
+      align-items: center;
+    }
+    .wm-line {
+      background: currentColor;
+      opacity: 0.22;
+      height: 1.5px;
+      border-radius: 1px;
+      flex-shrink: 0;
+    }
+    .wm-dot {
+      border-radius: 50%;
+      background: var(--orange);
+      flex-shrink: 0;
+    }
+
+    /* — hero size — */
+    .wm-hero {
+      font-size: clamp(46px, 7.5vw, 94px);
+      width: min(90vw, 960px);
+    }
+    .wm-hero .wm-part         { flex: 1; }
+    .wm-hero .wm-part:first-child { text-align: right; }
+    .wm-hero .wm-part:last-child  { text-align: left; }
+    .wm-hero .wm-spark { gap: clamp(6px, .9vw, 11px); padding: 0 clamp(10px, 1.4vw, 18px); flex-shrink: 0; }
+    .wm-hero .wm-line  { width: clamp(13px, 1.8vw, 22px); }
+    .wm-hero .wm-dot   {
+      width: clamp(9px, 1.1vw, 13px);
+      height: clamp(9px, 1.1vw, 13px);
+      animation: pulse 5s ease-in-out infinite;
+    }
+
+    /* — nav size — */
+    .wm-nav { font-size: 14px; }
+    .wm-nav .wm-spark { gap: 4px; padding: 0 7px; }
+    .wm-nav .wm-line  { width: 7px; }
+    .wm-nav .wm-dot   {
+      width: 4px; height: 4px;
+      box-shadow: 0 0 0 1px rgba(249,115,22,.15), 0 0 5px 2px rgba(249,115,22,.35);
+    }
+
+    /* — footer size — */
+    .wm-footer { font-size: 12px; }
+    .wm-footer .wm-spark { gap: 3px; padding: 0 5px; }
+    .wm-footer .wm-line  { width: 5px; }
+    .wm-footer .wm-dot   {
+      width: 3px; height: 3px;
+      box-shadow: 0 0 4px 2px rgba(249,115,22,.35);
+    }
+
+    @keyframes pulse {
+      0%,100% {
+        box-shadow:
+          0 0 0 3px rgba(249,115,22,.12),
+          0 0 12px 4px rgba(249,115,22,.35),
+          0 0 30px 10px rgba(249,115,22,.15);
+      }
+      50% {
+        box-shadow:
+          0 0 0 5px rgba(249,115,22,.18),
+          0 0 22px 8px rgba(249,115,22,.55),
+          0 0 50px 18px rgba(249,115,22,.22);
+      }
+    }
+
+    @keyframes pulse-sm {
+      0%,100% { box-shadow: 0 0 0 1px rgba(249,115,22,.12), 0 0 5px 2px rgba(249,115,22,.3); }
+      50%      { box-shadow: 0 0 0 2px rgba(249,115,22,.2), 0 0 9px 3px rgba(249,115,22,.45); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─────────────────────────────────────────
+       NAV
+    ───────────────────────────────────────── */
+    nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 100;
+      height: 54px;
+      padding: 0 clamp(20px, 5vw, 80px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(240,238,233,0.9);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-link:hover { color: var(--black); }
+
+    .nav-cta {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 1px solid var(--black);
+      padding-bottom: 2px;
+      transition: color .2s, border-color .2s;
+    }
+    .nav-cta:hover { color: var(--orange); border-color: var(--orange); }
+
+    @media (max-width: 600px) {
+      .nav-links .nav-link { display: none; }
+    }
+
+    /* ─────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px clamp(20px, 5vw, 80px) 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-dots {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(13,13,13,0.052) 1px, transparent 1px);
+      background-size: 26px 26px;
+      pointer-events: none;
+    }
+
+    .hero-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 65% 45% at 50% 52%, rgba(249,115,22,0.075) 0%, transparent 68%);
+      pointer-events: none;
+    }
+
+    .hero-lines {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent 0px, transparent 3px,
+        rgba(13,13,13,0.011) 3px, rgba(13,13,13,0.011) 4px
+      );
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 44px;
+      animation: fadeUp .8s ease both;
+    }
+
+    .hero-wm-wrap {
+      animation: fadeUp .8s .1s ease both;
+    }
+
+    .hero-rule {
+      width: clamp(160px, 36vw, 380px);
+      height: 1px;
+      background: var(--rule);
+      margin: 44px 0 36px;
+      animation: fadeUp .8s .2s ease both;
+    }
+
+    .hero-t1 {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(15px, 2.2vw, 24px);
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+      animation: fadeUp .8s .3s ease both;
+    }
+
+    .hero-t2 {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(12px, 1.5vw, 16px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--mid);
+      animation: fadeUp .8s .4s ease both;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 34px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: fadeUp .8s .7s ease both;
+    }
+    .hero-scroll-lbl {
+      font-family: 'Space Mono', monospace;
+      font-size: 7px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 28px;
+      background: linear-gradient(to bottom, var(--dim), transparent);
+      animation: drip 1.8s ease-in-out infinite;
+    }
+    @keyframes drip {
+      0%,100% { transform: translateY(0);    opacity: .5; }
+      50%      { transform: translateY(5px);  opacity: 1;  }
+    }
+
+    /* ─────────────────────────────────────────
+       SHARED SECTION CHROME
+    ───────────────────────────────────────── */
+    .sec {
+      padding: clamp(72px, 9vw, 130px) clamp(20px, 5vw, 80px);
+    }
+    .sec-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .sec-head {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 60px;
+    }
+    .sec-n {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+    .sec-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #666;
+    }
+    .sec-rule { flex: 1; height: 1px; background: var(--rule); }
+    .sec-rule-d { flex: 1; height: 1px; background: rgba(240,238,233,0.18); }
+
+    /* ─────────────────────────────────────────
+       01 — THESIS
+    ───────────────────────────────────────── */
+    #thesis { border-top: 1px solid var(--rule); }
+
+    .thesis-p {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(17px, 2.2vw, 25px);
+      font-weight: 400;
+      line-height: 1.68;
+      color: var(--black);
+      max-width: 760px;
+    }
+    .thesis-p em {
+      font-style: normal;
+      color: var(--orange);
+    }
+    .thesis-rule {
+      width: 40px;
+      height: 2px;
+      background: var(--orange);
+      margin: 36px 0 0;
+      opacity: .5;
+    }
+
+    /* ─────────────────────────────────────────
+       02 — MANIFESTO
+    ───────────────────────────────────────── */
+    #manifesto { background: #1a1714; }
+
+    .mf-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(240,238,233,0.05);
+    }
+    @media (max-width: 680px) { .mf-grid { grid-template-columns: 1fr; } }
+
+    .mf-card {
+      background: #1a1714;
+      padding: clamp(36px, 4vw, 56px) clamp(28px, 4vw, 52px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 36px;
+      min-height: 230px;
+      border: 1px solid transparent;
+      transition: border-color .3s;
+    }
+    .mf-card:hover { border-color: rgba(249,115,22,.18); }
+
+    .mf-n {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      color: rgba(240,238,233,0.18);
+    }
+    .mf-q {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(17px, 1.9vw, 23px);
+      font-weight: 700;
+      line-height: 1.42;
+      color: var(--cream);
+      letter-spacing: -0.01em;
+    }
+    .mf-q .hi { color: var(--orange); }
+
+    /* ─────────────────────────────────────────
+       03 — PORTFOLIO
+    ───────────────────────────────────────── */
+    #portfolio { border-top: 1px solid var(--rule); }
+
+    .pf-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+    @media (max-width: 1060px) { .pf-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px)  { .pf-grid { grid-template-columns: 1fr; } }
+
+    .pf-card {
+      border: 1px solid var(--rule);
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 340px;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      transition: border-color .3s, background .3s;
+    }
+    .pf-card:hover {
+      border-color: rgba(249,115,22,.22);
+      background: rgba(249,115,22,.016);
+    }
+
+    .pf-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .pf-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      color: #888;
+    }
+
+    .pf-status {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .pf-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+    }
+    .live-tag  { color: var(--orange); }
+    .live-tag .pf-dot {
+      background: var(--orange);
+      animation: pulse-sm 2.4s ease-in-out infinite;
+    }
+    .build-tag { color: #777; }
+    .build-tag .pf-dot { background: #777; }
+
+    .pf-bot {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .pf-cat {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #777;
+    }
+    .pf-name {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(20px, 2.2vw, 26px);
+      font-weight: 700;
+      line-height: 1.18;
+      color: var(--black);
+      letter-spacing: -0.01em;
+    }
+    .pf-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      line-height: 1.68;
+      color: #555;
+    }
+    .pf-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(13,13,13,.15);
+      padding-bottom: 2px;
+      align-self: flex-start;
+      margin-top: 4px;
+      transition: color .2s, border-color .2s;
+    }
+    .pf-card:hover .pf-link { color: var(--orange); border-color: var(--orange); }
+
+    /* more card */
+    .pf-card.more {
+      border-style: dashed;
+      border-color: rgba(13,13,13,.1);
+      align-items: center;
+      justify-content: center;
+      cursor: default;
+    }
+    .pf-card.more:hover {
+      background: transparent;
+      border-color: rgba(249,115,22,.14);
+    }
+    .more-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      text-align: center;
+    }
+    .more-spark-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .more-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--orange);
+      animation: pulse-sm 2s ease-in-out infinite;
+    }
+    .more-lbl {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+    .more-p {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: #888;
+      line-height: 1.65;
+      max-width: 160px;
+    }
+
+    /* ─────────────────────────────────────────
+       04 — PRINCIPLES
+    ───────────────────────────────────────── */
+    #principles { border-top: 1px solid var(--rule); background: #fff; }
+
+    .pr-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 860px) { .pr-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .pr-grid { grid-template-columns: 1fr; } }
+
+    .pr-item {
+      padding: 36px 30px;
+      border: 1px solid rgba(13,13,13,0.1);
+      margin: -1px 0 0 -1px;
+      transition: background .25s;
+    }
+    .pr-item:hover { background: rgba(249,115,22,.02); }
+
+    .pr-n {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.2em;
+      color: var(--orange);
+      margin-bottom: 18px;
+    }
+    .pr-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+    .pr-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      line-height: 1.72;
+      color: #555;
+    }
+
+    /* ─────────────────────────────────────────
+       05 — FOR GOOD
+    ───────────────────────────────────────── */
+    #for-good { background: #1a1714; }
+
+    .fg-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(48px, 7vw, 100px);
+      align-items: start;
+    }
+    @media (max-width: 720px) { .fg-inner { grid-template-columns: 1fr; } }
+
+    .fg-hl {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(26px, 3.6vw, 46px);
+      font-weight: 700;
+      line-height: 1.16;
+      color: var(--cream);
+      letter-spacing: -0.01em;
+    }
+    .fg-hl .hi { color: var(--orange); }
+
+    .fg-body { display: flex; flex-direction: column; gap: 20px; }
+
+    .fg-p {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.78;
+      color: rgba(240,238,233,.82);
+    }
+
+    .fg-quote {
+      font-family: 'Space Mono', monospace;
+      font-size: 16px;
+      font-style: italic;
+      color: rgba(249,115,22,.85);
+      padding-left: 20px;
+      border-left: 2px solid rgba(249,115,22,.45);
+      line-height: 1.75;
+      margin-top: 8px;
+    }
+
+    /* ─────────────────────────────────────────
+       06 — CTA
+    ───────────────────────────────────────── */
+    #cta { border-top: 1px solid var(--rule); }
+
+    .cta-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .cta-hl {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(26px, 4.5vw, 54px);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--black);
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
+    }
+
+    .cta-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      color: #666;
+      line-height: 1.75;
+      max-width: 440px;
+      margin-bottom: 52px;
+    }
+
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(16px, 2.2vw, 26px);
+      font-weight: 700;
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 2px solid var(--black);
+      padding-bottom: 4px;
+      letter-spacing: -0.01em;
+      transition: color .25s, border-color .25s;
+    }
+    .cta-link:hover { color: var(--orange); border-color: var(--orange); }
+
+    .cta-spark {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--orange);
+      flex-shrink: 0;
+      animation: pulse-sm 2.2s ease-in-out infinite;
+    }
+
+    .cta-note {
+      margin-top: 36px;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #888;
+    }
+
+    /* ─────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 28px clamp(20px, 5vw, 80px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .ft-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .ft-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #888;
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .ft-link:hover { color: var(--black); }
+
+    .ft-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #888;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════
+       NAV
+  ══════════════════════════════════════ -->
+  <nav>
+    <a class="wordmark wm-nav" href="/">
+      <span class="wm-part">SHORT</span>
+      <div class="wm-spark">
+        <div class="wm-line"></div>
+        <div class="wm-dot"></div>
+        <div class="wm-line"></div>
+      </div>
+      <span class="wm-part">CIRCUIT</span>
+    </a>
+    <div class="nav-links">
+      <a href="#portfolio"  class="nav-link">Work</a>
+      <a href="#principles" class="nav-link">Approach</a>
+      <a href="#for-good"   class="nav-link">For Good</a>
+      <a href="mailto:hey@shortcircuit.ventures" class="nav-cta">Get in Touch ↗</a>
+    </div>
+  </nav>
+
+
+  <!-- ══════════════════════════════════════
+       HERO
+  ══════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-dots"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-lines"></div>
+
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Venture Studio &nbsp;·&nbsp; Toronto</p>
+
+      <div class="hero-wm-wrap">
+        <div class="wordmark wm-hero">
+          <span class="wm-part">SHORT</span>
+          <div class="wm-spark">
+            <div class="wm-line"></div>
+            <div class="wm-dot"></div>
+            <div class="wm-line"></div>
+          </div>
+          <span class="wm-part">CIRCUIT</span>
+        </div>
+      </div>
+
+      <div class="hero-rule"></div>
+      <p class="hero-t1">Niche today. Category tomorrow.</p>
+      <p class="hero-t2">We move first.</p>
+    </div>
+
+    <div class="hero-scroll">
+      <span class="hero-scroll-lbl">Scroll</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       01 — WHO WE ARE
+  ══════════════════════════════════════ -->
+  <section id="thesis" class="sec">
+    <div class="sec-inner">
+      <div class="sec-head">
+        <span class="sec-n">01</span>
+        <span class="sec-title">Who We Are</span>
+        <div class="sec-rule"></div>
+      </div>
+      <p class="thesis-p">
+        ShortCircuit is a venture studio at the frontier of <em>AI agents</em>,
+        <em>tokenization</em>, and the <em>ownership economy</em>. We find
+        opportunities before they have names, build fast enough to own
+        the niche, and ship products that challenge how things are supposed
+        to work.<br><br>
+        We're not waiting for the future. We're building it.
+      </p>
+      <div class="thesis-rule"></div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       02 — WHAT WE BELIEVE
+  ══════════════════════════════════════ -->
+  <section id="manifesto" class="sec">
+    <div class="sec-inner">
+      <div class="sec-head">
+        <span class="sec-n" style="color:rgba(249,115,22,.85);">02</span>
+        <span class="sec-title" style="color:rgba(240,238,233,.5);">What We Believe</span>
+        <div class="sec-rule-d"></div>
+      </div>
+
+      <div class="mf-grid">
+
+        <div class="mf-card">
+          <span class="mf-n">01</span>
+          <p class="mf-q">The best opportunities look like <span class="hi">bad ideas</span> until they don't.</p>
+        </div>
+
+        <div class="mf-card">
+          <span class="mf-n">02</span>
+          <p class="mf-q">We move at <span class="hi">startup speed.</span><br>We think at civilization scale.</p>
+        </div>
+
+        <div class="mf-card">
+          <span class="mf-n">03</span>
+          <p class="mf-q"><span class="hi">Ownership</span> is not a feature.<br>It's the product.</p>
+        </div>
+
+        <div class="mf-card">
+          <span class="mf-n">04</span>
+          <p class="mf-q">Technology should give people <span class="hi">sovereignty</span>, not dependency.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       03 — WHAT WE'VE BUILT
+  ══════════════════════════════════════ -->
+  <section id="portfolio" class="sec">
+    <div class="sec-inner">
+      <div class="sec-head">
+        <span class="sec-n">03</span>
+        <span class="sec-title">What We've Built</span>
+        <div class="sec-rule"></div>
+      </div>
+
+      <div class="pf-grid">
+
+        <!-- dAI Index -->
+        <div class="pf-card">
+          <div class="pf-top">
+            <span class="pf-num">01</span>
+            <div class="pf-status live-tag">
+              <div class="pf-dot"></div>Live
+            </div>
+          </div>
+          <div class="pf-bot">
+            <span class="pf-cat">Tokenization · AI Infra</span>
+            <h3 class="pf-name">dAI<br>Index</h3>
+            <p class="pf-desc">The first decentralized AI index. Build, backtest, and tokenize custom indexes on AI infrastructure tokens — deployed as ERC-4626 vaults on 0G network.</p>
+            <a href="https://openw3b.io" target="_blank" rel="noopener" class="pf-link">openw3b.io ↗</a>
+          </div>
+        </div>
+
+        <!-- Lobster Arena -->
+        <div class="pf-card">
+          <div class="pf-top">
+            <span class="pf-num">02</span>
+            <div class="pf-status live-tag">
+              <div class="pf-dot"></div>Live
+            </div>
+          </div>
+          <div class="pf-bot">
+            <span class="pf-cat">AI Agents · DeFi</span>
+            <h3 class="pf-name">Lobster<br>Arena</h3>
+            <p class="pf-desc">AI trading battle royale on Hyperliquid. Deploy an OpenClaw-powered lobster, compete in 7-day seasons. The market decides who survives.</p>
+            <a href="https://openclawarena.gg" target="_blank" rel="noopener" class="pf-link">openclawarena.gg ↗</a>
+          </div>
+        </div>
+
+        <!-- Claw for Business -->
+        <div class="pf-card">
+          <div class="pf-top">
+            <span class="pf-num">03</span>
+            <div class="pf-status build-tag">
+              <div class="pf-dot"></div>Building
+            </div>
+          </div>
+          <div class="pf-bot">
+            <span class="pf-cat">AI SaaS · Business Intel</span>
+            <h3 class="pf-name">Claw for<br>Business</h3>
+            <p class="pf-desc">AI ops for modern teams. Connect your live data — Shopify, Analytics, Ads, Sheets — to an intelligence layer that actually knows your company.</p>
+            <a href="https://openclawforbusiness.io" target="_blank" rel="noopener" class="pf-link">openclawforbusiness.io ↗</a>
+          </div>
+        </div>
+
+        <!-- More -->
+        <div class="pf-card more">
+          <div class="more-body">
+            <div class="more-spark-row">
+              <div class="more-dot"></div>
+              <span class="more-lbl">In build</span>
+            </div>
+            <p class="more-p">The next niche is already in motion.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       04 — HOW WE WORK
+  ══════════════════════════════════════ -->
+  <section id="principles" class="sec">
+    <div class="sec-inner">
+      <div class="sec-head">
+        <span class="sec-n">04</span>
+        <span class="sec-title">How We Work</span>
+        <div class="sec-rule"></div>
+      </div>
+
+      <div class="pr-grid">
+
+        <div class="pr-item">
+          <p class="pr-n">01</p>
+          <h4 class="pr-name">Speed to Validity</h4>
+          <p class="pr-desc">We don't spend a year planning. We build a version, put it in front of real people, and learn faster than anyone else in the room.</p>
+        </div>
+
+        <div class="pr-item">
+          <p class="pr-n">02</p>
+          <h4 class="pr-name">Paradox Thinking</h4>
+          <p class="pr-desc">The best ideas sound wrong at first. We actively seek positions that feel contradictory — that's usually where the real opportunity lives.</p>
+        </div>
+
+        <div class="pr-item">
+          <p class="pr-n">03</p>
+          <h4 class="pr-name">Niche First</h4>
+          <p class="pr-desc">Every category starts as a niche. We find it before it has competition, build the best product there, and grow from a position of ownership.</p>
+        </div>
+
+        <div class="pr-item">
+          <p class="pr-n">04</p>
+          <h4 class="pr-name">Ownership Economy</h4>
+          <p class="pr-desc">We build products where users own the value they create. Not as a gimmick — as a fundamental design decision. Users as stakeholders, not customers.</p>
+        </div>
+
+        <div class="pr-item">
+          <p class="pr-n">05</p>
+          <h4 class="pr-name">Sovereignty by Design</h4>
+          <p class="pr-desc">Products should give people more control over their data, money, and future — not less. Sovereignty isn't a feature, it's an architectural commitment.</p>
+        </div>
+
+        <div class="pr-item">
+          <p class="pr-n">06</p>
+          <h4 class="pr-name">Ship. Test. Evolve.</h4>
+          <p class="pr-desc">Shipping is how you learn. We iterate in public, adapt to signal fast, and move at a pace the market doesn't expect from a studio.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       05 — FOR GOOD
+  ══════════════════════════════════════ -->
+  <section id="for-good" class="sec">
+    <div class="sec-inner">
+      <div class="sec-head">
+        <span class="sec-n" style="color:rgba(249,115,22,.85);">05</span>
+        <span class="sec-title" style="color:rgba(240,238,233,.5);">For Good</span>
+        <div class="sec-rule-d"></div>
+      </div>
+
+      <div class="fg-inner">
+
+        <h2 class="fg-hl">Technology should work for <span class="hi">everyone.</span></h2>
+
+        <div class="fg-body">
+          <p class="fg-p">Beyond the venture work, we build for people who can't pay. Developing nations, underserved communities, the ones that technology usually passes by. We believe the same tools we build at the frontier should be available to people on the ground.</p>
+          <p class="fg-p">Humanitarian projects don't follow an ROI model. They follow a different kind of math — reach, dignity, and access. We fund these with the commercial work, and we build them with the same intensity.</p>
+          <p class="fg-quote">"Every short circuit needs a ground."</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       06 — CTA
+  ══════════════════════════════════════ -->
+  <section id="cta" class="sec">
+    <div class="sec-inner">
+      <div class="cta-inner">
+        <h2 class="cta-hl">Build something<br>that matters.</h2>
+        <p class="cta-sub">Partner with us. Pitch us. Join us.<br>Or just say hello — we read everything.</p>
+        <a class="cta-link" href="mailto:hey@shortcircuit.ventures">
+          <div class="cta-spark"></div>
+          hey@shortcircuit.ventures
+        </a>
+        <p class="cta-note">Or find us on the frontier — we're usually there first.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════ -->
+  <footer>
+    <a class="wordmark wm-footer" href="/">
+      <span class="wm-part">SHORT</span>
+      <div class="wm-spark">
+        <div class="wm-line"></div>
+        <div class="wm-dot"></div>
+        <div class="wm-line"></div>
+      </div>
+      <span class="wm-part">CIRCUIT</span>
+    </a>
+    <div class="ft-links">
+      <a class="ft-link" href="https://openw3b.io"              target="_blank" rel="noopener">dAI Index</a>
+      <a class="ft-link" href="https://openclawarena.gg"         target="_blank" rel="noopener">Lobster Arena</a>
+      <a class="ft-link" href="https://openclawforbusiness.io"   target="_blank" rel="noopener">Claw for Business</a>
+      <a class="ft-link" href="mailto:hey@shortcircuit.ventures">hey@shortcircuit.ventures</a>
+    </div>
+    <p class="ft-copy">© 2026 ShortCircuit Ventures</p>
+  </footer>
+
+</body>
+</html>

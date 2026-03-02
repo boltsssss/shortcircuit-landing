@@ -357,9 +357,51 @@
 
 
     /* ─────────────────────────────────────────
+       02 — THE MODEL (dark zone)
+    ───────────────────────────────────────── */
+    #manifesto { background: #1a1714; }
+
+    .mf-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(240,238,233,0.05);
+    }
+    @media (max-width: 680px) { .mf-grid { grid-template-columns: 1fr; } }
+
+    .mf-card {
+      background: #1a1714;
+      padding: clamp(36px, 4vw, 56px) clamp(28px, 4vw, 52px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 36px;
+      min-height: 230px;
+      border: 1px solid transparent;
+      transition: border-color .3s;
+    }
+    .mf-card:hover { border-color: rgba(249,115,22,.18); }
+
+    .mf-n {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      color: rgba(240,238,233,0.18);
+    }
+    .mf-q {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(17px, 1.9vw, 23px);
+      font-weight: 700;
+      line-height: 1.42;
+      color: var(--cream);
+      letter-spacing: -0.01em;
+    }
+    .mf-q .hi { color: var(--orange); }
+
+    /* ─────────────────────────────────────────
        03 — PORTFOLIO
     ───────────────────────────────────────── */
-    #portfolio { border-top: 1px solid var(--rule); background: #fff; }
+    #portfolio { border-top: 1px solid var(--rule); }
 
     .pf-grid {
       display: grid;
@@ -512,7 +554,7 @@
     /* ─────────────────────────────────────────
        04 — PRINCIPLES
     ───────────────────────────────────────── */
-    #principles { border-top: 1px solid var(--rule); background: var(--cream); }
+    #principles { border-top: 1px solid var(--rule); background: #fff; }
 
     .pr-grid {
       display: grid;
@@ -718,7 +760,7 @@
     </a>
     <div class="nav-links">
       <a href="#portfolio"  class="nav-link">Work</a>
-      <a href="#principles" class="nav-link">The Model</a>
+      <a href="#principles" class="nav-link">Approach</a>
       <a href="#for-good"   class="nav-link">For Good</a>
       <a href="mailto:hey@shortcircuit.ventures" class="nav-cta">Get in Touch ↗</a>
     </div>
@@ -787,12 +829,50 @@
 
 
   <!-- ══════════════════════════════════════
+       02 — WHAT WE BELIEVE
+  ══════════════════════════════════════ -->
+  <section id="manifesto" class="sec">
+    <div class="sec-inner">
+      <div class="sec-head">
+        <span class="sec-n" style="color:rgba(249,115,22,.85);">02</span>
+        <span class="sec-title" style="color:rgba(240,238,233,.5);">What We Believe</span>
+        <div class="sec-rule-d"></div>
+      </div>
+
+      <div class="mf-grid">
+
+        <div class="mf-card">
+          <span class="mf-n">01</span>
+          <p class="mf-q">The best opportunities look like <span class="hi">bad ideas</span> until they don't.</p>
+        </div>
+
+        <div class="mf-card">
+          <span class="mf-n">02</span>
+          <p class="mf-q">We move at <span class="hi">startup speed.</span><br>We think at civilization scale.</p>
+        </div>
+
+        <div class="mf-card">
+          <span class="mf-n">03</span>
+          <p class="mf-q"><span class="hi">Ownership</span> is not a feature.<br>It's the product.</p>
+        </div>
+
+        <div class="mf-card">
+          <span class="mf-n">04</span>
+          <p class="mf-q">Technology should give people <span class="hi">sovereignty</span>, not dependency.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
        03 — WHAT WE'VE BUILT
   ══════════════════════════════════════ -->
   <section id="portfolio" class="sec">
     <div class="sec-inner">
       <div class="sec-head">
-        <span class="sec-n">02</span>
+        <span class="sec-n">03</span>
         <span class="sec-title">What We've Built</span>
         <div class="sec-rule"></div>
       </div>
@@ -864,13 +944,13 @@
 
 
   <!-- ══════════════════════════════════════
-       02 — THE MODEL
+       04 — HOW WE WORK
   ══════════════════════════════════════ -->
   <section id="principles" class="sec">
     <div class="sec-inner">
       <div class="sec-head">
-        <span class="sec-n">03</span>
-        <span class="sec-title">The Model</span>
+        <span class="sec-n">04</span>
+        <span class="sec-title">How We Work</span>
         <div class="sec-rule"></div>
       </div>
 
@@ -878,32 +958,38 @@
 
         <div class="pr-item">
           <p class="pr-n">01</p>
-          <h4 class="pr-name">The best ideas sound wrong at first.</h4>
-          <p class="pr-desc">We actively seek positions that feel contradictory — that's usually where the real opportunity lives. If everyone can see it clearly, we're already late.</p>
+          <h4 class="pr-name">Speed to Validity</h4>
+          <p class="pr-desc">We don't spend a year planning. Build a version, put it in front of real people, and learn faster than anyone else in the room.</p>
         </div>
 
         <div class="pr-item">
           <p class="pr-n">02</p>
-          <h4 class="pr-name">Move at startup speed. Think at civilization scale.</h4>
-          <p class="pr-desc">We don't spend a year planning. We build a version, put it in front of real people, and learn faster than anyone else in the room. Shipping is how you learn. We iterate in public, adapt to signal fast, and move at a pace the market doesn't expect.</p>
+          <h4 class="pr-name">Paradox Thinking</h4>
+          <p class="pr-desc">The best ideas sound wrong at first. Seek contradictory positions — that's usually where the real opportunity lives.</p>
         </div>
 
         <div class="pr-item">
           <p class="pr-n">03</p>
-          <h4 class="pr-name">Niche today. Category tomorrow.</h4>
-          <p class="pr-desc">Every category starts as a niche. We find it before it has a name, build the best product there, and grow from a position of ownership — not competition.</p>
+          <h4 class="pr-name">Niche First</h4>
+          <p class="pr-desc">Every category starts as a niche. Find it before it has competition, build the best product there, and own it.</p>
         </div>
 
         <div class="pr-item">
           <p class="pr-n">04</p>
-          <h4 class="pr-name">Ownership is not a feature. It's the product.</h4>
-          <p class="pr-desc">We build products where users own the value they create. Not as a gimmick — as a fundamental design decision. Users as stakeholders, not customers.</p>
+          <h4 class="pr-name">Ownership Economy</h4>
+          <p class="pr-desc">We build products where users own the value they create. Not as a gimmick — as a fundamental design decision.</p>
         </div>
 
         <div class="pr-item">
           <p class="pr-n">05</p>
-          <h4 class="pr-name">Technology should give people sovereignty, not dependency.</h4>
-          <p class="pr-desc">Products should give people more control over their data, money, and future — not less. Sovereignty isn't a feature, it's an architectural commitment.</p>
+          <h4 class="pr-name">Sovereignty by Design</h4>
+          <p class="pr-desc">Products should give people more control over their data, money, and future — not less. Sovereignty is architecture.</p>
+        </div>
+
+        <div class="pr-item">
+          <p class="pr-n">06</p>
+          <h4 class="pr-name">Ship. Test. Evolve.</h4>
+          <p class="pr-desc">Shipping is how you learn. Iterate in public, adapt to signal fast, and move at a pace the market doesn't expect.</p>
         </div>
 
       </div>
@@ -917,7 +1003,7 @@
   <section id="for-good" class="sec">
     <div class="sec-inner">
       <div class="sec-head">
-        <span class="sec-n" style="color:rgba(249,115,22,.85);">04</span>
+        <span class="sec-n" style="color:rgba(249,115,22,.85);">05</span>
         <span class="sec-title" style="color:rgba(240,238,233,.5);">For Good</span>
         <div class="sec-rule-d"></div>
       </div>

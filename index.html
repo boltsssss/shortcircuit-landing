@@ -509,11 +509,14 @@
 
     /* more card */
     .pf-card.more {
+      grid-column: 1 / -1;
+      min-height: 72px;
       border-style: dashed;
       border-color: rgba(13,13,13,.1);
       align-items: center;
       justify-content: center;
       cursor: default;
+      padding: 20px 28px;
     }
     .pf-card.more:hover {
       background: transparent;
@@ -521,10 +524,9 @@
     }
     .more-body {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
-      gap: 14px;
-      text-align: center;
+      gap: 20px;
     }
     .more-spark-row {
       display: flex;
@@ -549,7 +551,6 @@
       font-size: 12px;
       color: #888;
       line-height: 1.65;
-      max-width: 160px;
     }
 
     /* ─────────────────────────────────────────
@@ -941,6 +942,17 @@
             <h3 class="pf-name">Lobster<br>Arena</h3>
             <p class="pf-desc">AI trading battle royale on Hyperliquid. Deploy an OpenClaw-powered lobster, compete in 7-day seasons. The market decides who survives.</p>
             <a href="https://openclawarena.gg" target="_blank" rel="noopener" class="pf-link">openclawarena.gg ↗</a>
+          </div>
+        </div>
+
+        <!-- More -->
+        <div class="pf-card more">
+          <div class="more-body">
+            <div class="more-spark-row">
+              <div class="more-dot"></div>
+              <span class="more-lbl">In Build</span>
+            </div>
+            <p class="more-p">The next niche is already in motion.</p>
           </div>
         </div>
 

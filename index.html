@@ -359,7 +359,8 @@
     /* ─────────────────────────────────────────
        02 — THE MODEL (dark zone)
     ───────────────────────────────────────── */
-    #manifesto { background: #1a1714; }
+    #manifesto { background: #1a1714; padding-top: clamp(48px, 5vw, 72px); padding-bottom: clamp(48px, 5vw, 72px); }
+    #manifesto .sec-head { margin-bottom: 36px; }
 
     .mf-grid {
       display: grid;
@@ -371,12 +372,12 @@
 
     .mf-card {
       background: #1a1714;
-      padding: clamp(36px, 4vw, 56px) clamp(28px, 4vw, 52px);
+      padding: clamp(24px, 2.8vw, 38px) clamp(24px, 3vw, 40px);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 36px;
-      min-height: 230px;
+      gap: 24px;
+      min-height: 160px;
       border: 1px solid transparent;
       transition: border-color .3s;
     }

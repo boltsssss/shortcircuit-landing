@@ -176,6 +176,72 @@
     }
 
     /* ─────────────────────────────────────────
+       MOBILE — SECTION REORDER (option 3)
+       Portfolio surfaces first so proof leads
+    ───────────────────────────────────────── */
+    @media (max-width: 600px) {
+      body { display: flex; flex-direction: column; }
+      nav          { order: 0; }
+      #hero        { order: 1; }
+      #portfolio   { order: 2; }
+      #thesis      { order: 3; }
+      #manifesto   { order: 4; }
+      #principles  { order: 5; }
+      #for-good    { order: 6; }
+      #cta         { order: 7; }
+    }
+
+    /* ─────────────────────────────────────────
+       MOBILE — PROGRESSIVE DISCLOSURE (option 1)
+    ───────────────────────────────────────── */
+    @media (max-width: 600px) {
+      /* Who We Are — clamp paragraph */
+      .thesis-p .thesis-more { display: none; }
+      .thesis-p .thesis-more.open { display: inline; }
+
+      /* How We Work — hide descriptions */
+      .pr-desc { display: none; }
+      .pr-desc.open { display: block; }
+      .pr-item { cursor: pointer; }
+      .pr-item .pr-name::after {
+        content: ' +';
+        font-size: 10px;
+        color: #aaa;
+        font-family: 'Space Mono', monospace;
+      }
+      .pr-item.open .pr-name::after { content: ' −'; }
+
+      /* For Good — hide second paragraph */
+      .fg-p:nth-child(2) { display: none; }
+      .fg-p:nth-child(2).open { display: block; }
+      .fg-quote { display: none; }
+      .fg-quote.open { display: block; }
+
+      /* Read more / less toggle button */
+      .read-toggle {
+        display: inline-block;
+        margin-top: 10px;
+        font-family: 'Space Mono', monospace;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: .08em;
+        color: rgba(249,115,22,.85);
+        cursor: pointer;
+        border: none;
+        background: none;
+        padding: 0;
+      }
+    }
+    /* Hide toggles on desktop */
+    @media (min-width: 601px) {
+      .read-toggle { display: none !important; }
+      .thesis-more,
+      .pr-desc,
+      .fg-p:nth-child(2),
+      .fg-quote { display: revert !important; }
+    }
+
+    /* ─────────────────────────────────────────
        HERO
     ───────────────────────────────────────── */
     #hero {
@@ -816,12 +882,13 @@
       </div>
       <p class="thesis-p">
         ShortCircuit is a venture studio at the frontier of <em>AI agents</em>,
-        <em>tokenization</em>, and the <em>ownership economy</em>. We find
+        <em>tokenization</em>, and the <em>ownership economy</em>.<span class="thesis-more"> We find
         opportunities before they have names, build fast enough to own
         the niche, and ship products that challenge how things are supposed
         to work.<br><br>
-        We're not waiting for the future.<br>We're building it.
+        We're not waiting for the future.<br>We're building it.</span>
       </p>
+      <button class="read-toggle" data-target="thesis-more" onclick="toggleMore(this)">Read more</button>
       <div class="thesis-rule"></div>
     </div>
   </section>
@@ -974,37 +1041,37 @@
 
       <div class="pr-grid">
 
-        <div class="pr-item">
+        <div class="pr-item" onclick="togglePrItem(this)">
           <p class="pr-n">01</p>
           <h4 class="pr-name">Speed to Validity</h4>
           <p class="pr-desc">Build a version, put it in front of real people, learn faster than anyone else in the room.</p>
         </div>
 
-        <div class="pr-item">
+        <div class="pr-item" onclick="togglePrItem(this)">
           <p class="pr-n">02</p>
           <h4 class="pr-name">Paradox Thinking</h4>
           <p class="pr-desc">Seek contradictory positions. That's where the real opportunity lives.</p>
         </div>
 
-        <div class="pr-item">
+        <div class="pr-item" onclick="togglePrItem(this)">
           <p class="pr-n">03</p>
           <h4 class="pr-name">Niche First</h4>
           <p class="pr-desc">Find it before it has competition. Build the best product there. Own the niche.</p>
         </div>
 
-        <div class="pr-item">
+        <div class="pr-item" onclick="togglePrItem(this)">
           <p class="pr-n">04</p>
           <h4 class="pr-name">Ownership Economy</h4>
           <p class="pr-desc">Users own the value they create. Not as a gimmick — as a fundamental design decision.</p>
         </div>
 
-        <div class="pr-item">
+        <div class="pr-item" onclick="togglePrItem(this)">
           <p class="pr-n">05</p>
           <h4 class="pr-name">Sovereignty by Design</h4>
           <p class="pr-desc">More control over data, money, and future — not less. Built into the architecture from day one.</p>
         </div>
 
-        <div class="pr-item">
+        <div class="pr-item" onclick="togglePrItem(this)">
           <p class="pr-n">06</p>
           <h4 class="pr-name">Ship. Test. Evolve.</h4>
           <p class="pr-desc">Shipping is how you learn. Iterate in public, adapt to signal fast.</p>
@@ -1034,6 +1101,7 @@
           <p class="fg-p">Beyond the venture work, we build for people who can't pay. Developing nations, underserved communities, the ones that technology usually passes by. We believe the same tools we build at the frontier should be available to people on the ground.</p>
           <p class="fg-p">Humanitarian projects don't follow an ROI model. They follow a different kind of math — reach, dignity, and access. We fund these with the commercial work, and we build them with the same intensity.</p>
           <p class="fg-quote">"Every short circuit needs a ground."</p>
+          <button class="read-toggle" data-target="fg-more" onclick="toggleFgMore(this)">Read more</button>
         </div>
 
       </div>
@@ -1080,6 +1148,37 @@
     </div>
     <p class="ft-copy">© 2026 ShortCircuit Ventures</p>
   </footer>
+
+  <script>
+    // Only runs on mobile — desktop CSS shows everything regardless
+    function isMobile() { return window.innerWidth <= 600; }
+
+    // Who We Are — "Read more" toggle
+    function toggleMore(btn) {
+      if (!isMobile()) return;
+      var more = document.querySelector('.thesis-more');
+      var open = more.classList.toggle('open');
+      btn.textContent = open ? 'Read less' : 'Read more';
+    }
+
+    // How We Work — tap principle to expand description
+    function togglePrItem(el) {
+      if (!isMobile()) return;
+      var desc = el.querySelector('.pr-desc');
+      el.classList.toggle('open');
+      desc.classList.toggle('open');
+    }
+
+    // For Good — "Read more" toggle
+    function toggleFgMore(btn) {
+      if (!isMobile()) return;
+      var p2   = document.querySelector('.fg-p:nth-child(2)');
+      var quote = document.querySelector('.fg-quote');
+      var open = p2.classList.toggle('open');
+      quote.classList.toggle('open');
+      btn.textContent = open ? 'Read less' : 'Read more';
+    }
+  </script>
 
 </body>
 </html>

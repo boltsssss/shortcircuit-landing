@@ -168,25 +168,46 @@
       50%       { box-shadow: 0 0 14px 3px rgba(249,115,22,0.2); border-color: rgba(249,115,22,0.8); }
     }
 
-    .hero-headline {
+    .hero-logo {
+      display: inline-flex;
+      align-items: stretch;
       font-family: var(--mono);
-      font-size: clamp(28px, 4vw, 48px);
       font-weight: 700;
-      line-height: 1.2;
-      letter-spacing: -0.025em;
-      color: var(--dark);
-      margin-bottom: 28px;
+      font-size: clamp(22px, 4vw, 48px);
+      letter-spacing: 0.06em;
+      line-height: 1;
+      margin-bottom: 36px;
     }
-    .hero-headline .ot { color: var(--orange); }
+    .hl-left, .hl-right {
+      background: var(--dark);
+      color: #fff;
+      padding: 0.45em 0.6em;
+      display: flex;
+      align-items: center;
+    }
+    .hl-mid {
+      background: var(--orange);
+      padding: 0.45em 0.5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hl-sq {
+      width: 0.45em;
+      height: 0.45em;
+      border: 0.1em solid #fff;
+      display: block;
+    }
 
-    .hero-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(15px, 1.6vw, 17px);
-      font-weight: 300;
-      line-height: 1.8;
-      color: rgba(13,13,13,0.5);
+    .hero-mission {
+      font-family: var(--mono);
+      font-size: clamp(13px, 1.4vw, 16px);
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      color: rgba(13,13,13,0.45);
       margin-bottom: 48px;
     }
+    .hero-mission .ot { color: var(--orange); }
 
     .hero-actions {
       display: flex;
@@ -821,13 +842,14 @@
         <span class="cn-line right"></span>
       </div>
 
-      <div class="hero-headline">
-        We build the economic systems<br>of the <span class="ot">AI age.</span>
+      <div class="hero-logo">
+        <span class="hl-left">SHORT</span>
+        <span class="hl-mid"><span class="hl-sq"></span></span>
+        <span class="hl-right">CIRCUIT</span>
       </div>
 
-      <div class="hero-sub">
-        Not startups. Infrastructure. The networks, protocols, and platforms<br>
-        that the next economy will run on.
+      <div class="hero-mission">
+        Engineering the Economic Systems of the <span class="ot">AI Age.</span>
       </div>
 
       <div class="hero-actions">

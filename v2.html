@@ -27,9 +27,9 @@
     body {
       background: var(--cream);
       color: var(--dark);
-      font-family: var(--sans);
-      font-weight: 300;
-      line-height: 1.7;
+      font-family: var(--mono);
+      font-weight: 400;
+      line-height: 1.85;
       overflow-x: hidden;
     }
 
@@ -173,10 +173,10 @@
 
     /* Manifesto text */
     .manifesto {
-      font-family: var(--sans);
-      font-weight: 300;
-      font-size: clamp(17px, 2.4vw, 21px);
-      line-height: 1.9;
+      font-family: var(--mono);
+      font-weight: 400;
+      font-size: clamp(15px, 1.8vw, 19px);
+      line-height: 2;
       color: var(--dark);
       text-align: center;
     }
@@ -259,14 +259,18 @@
 
     .section-label {
       font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.2em;
+      font-size: 11px;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 16px;
+      color: var(--muted);
+      margin-bottom: 24px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
+    }
+    .section-label .num {
+      color: var(--orange);
+      font-weight: 700;
     }
     .section-label::after {
       content: '';
@@ -351,9 +355,8 @@
     }
     .card-desc {
       font-size: 13px;
-      line-height: 1.7;
+      line-height: 1.85;
       color: rgba(13,13,13,0.55);
-      font-weight: 300;
     }
     .card-arrow {
       margin-top: 28px;
@@ -471,10 +474,18 @@
       color: var(--dark);
     }
     .tc-body {
+      font-family: var(--mono);
       font-size: 15px;
       line-height: 2;
-      color: rgba(13,13,13,0.55);
+      color: rgba(13,13,13,0.6);
       margin-bottom: 16px;
+    }
+    .section-accent {
+      display: block;
+      width: 32px;
+      height: 2px;
+      background: var(--orange);
+      margin-top: 32px;
     }
     .tc-accent {
       font-family: var(--mono);
@@ -485,6 +496,13 @@
       line-height: 2;
     }
 
+    .ot { color: var(--orange); }
+    .ot-u {
+      color: var(--orange);
+      text-decoration: underline;
+      text-decoration-color: rgba(249,115,22,0.4);
+      text-underline-offset: 3px;
+    }
     /* ── FOOTER ───────────────────────────────────────── */
     footer {
       border-top: 1px solid var(--border);
@@ -579,13 +597,13 @@
 
         <span class="spacer"></span>
 
-        But most systems are <span class="highlight">slow</span>.<br>
+        But most systems are <span class="ot">slow</span>.<br>
         They evolve gradually.
 
         <span class="spacer"></span>
 
         We believe progress happens differently.<br>
-        Through <span class="highlight">short circuits</span>.
+        Through <span class="ot">short circuits</span>.
 
         <span class="spacer"></span>
 
@@ -616,7 +634,7 @@
 
   <!-- SYSTEMS -->
   <div class="section-wrap" id="systems">
-    <div class="section-label">Current Systems</div>
+    <div class="section-label"><span class="num">01</span> Current Systems</div>
     <h2 class="section-title">Not startups.<br>Infrastructure.</h2>
     <p class="section-sub">Each system is a circuit inside the network.</p>
 
@@ -648,7 +666,7 @@
   <!-- LAYER MODEL -->
   <div class="layers-section" id="layers">
     <div class="layers-inner">
-      <div class="section-label">Architecture</div>
+      <div class="section-label"><span class="num">02</span> Architecture</div>
       <h2 class="section-title">The Stack</h2>
       <p class="section-sub">Infrastructure for the AI economy, built in layers.</p>
 
@@ -690,21 +708,22 @@
   <!-- THESIS CLOSE -->
   <div class="thesis-close">
     <div class="tc-inner">
-      <div class="section-label">The Thesis</div>
+      <div class="section-label"><span class="num">03</span> The Thesis</div>
       <h2 class="tc-large">Engineering the Economic Systems of the AI Age.</h2>
       <p class="tc-body">
-        History advances through short circuits. Every time a new technology emerges, it breaks the existing path and creates a faster one.
+        History advances through short circuits. Every time a new technology emerges, it <span class="ot">breaks the existing path</span> and creates a faster one.
       </p>
       <div class="tc-accent">
         Electricity → telegraph &nbsp;·&nbsp; Internet → email &nbsp;·&nbsp; Crypto → programmable money &nbsp;·&nbsp; AI → autonomous intelligence
       </div>
       <p class="tc-body">
-        ShortCircuit exists to build those moments intentionally — not to observe disruption, but to engineer it.
+        ShortCircuit exists to build those moments intentionally — not to observe disruption, but to <span class="ot">engineer it</span>.
       </p>
       <p class="tc-body">
         The next economic systems will not be built gradually. They will emerge through short circuits. We are building the infrastructure that makes them possible.
       </p>
-    </div>
+        <span class="section-accent"></span>
+  </div>
   </div>
 
   <!-- FOOTER -->

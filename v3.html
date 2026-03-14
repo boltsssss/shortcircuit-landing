@@ -885,9 +885,9 @@
       </div>
 
       <div class="hero-logo" id="hero-logo" style="opacity:0">
-        <span class="hl-left" id="tw-left"></span>
+        <span class="hl-left" id="tw-left"><span class="tw-ch" style="opacity:0">S</span><span class="tw-ch" style="opacity:0">H</span><span class="tw-ch" style="opacity:0">O</span><span class="tw-ch" style="opacity:0">R</span><span class="tw-ch" style="opacity:0">T</span></span>
         <span class="hl-mid" id="tw-mid" style="opacity:0"><span class="hl-sq"></span></span>
-        <span class="hl-right" id="tw-right"></span>
+        <span class="hl-right" id="tw-right"><span class="tw-ch" style="opacity:0">C</span><span class="tw-ch" style="opacity:0">I</span><span class="tw-ch" style="opacity:0">R</span><span class="tw-ch" style="opacity:0">C</span><span class="tw-ch" style="opacity:0">U</span><span class="tw-ch" style="opacity:0">I</span><span class="tw-ch" style="opacity:0">T</span></span>
       </div>
 
       <div class="hero-mission" id="hero-mission" style="opacity:0">
@@ -1020,10 +1020,12 @@
       const PAUSE  = 180;  // pause before next word
 
       function typeInto(el, text, cb) {
-        let i = 0;
+        var chars = el.querySelectorAll('.tw-ch');
+        var i = 0;
         function next() {
-          if (i <= text.length) {
-            el.textContent = text.slice(0, i);
+          if (i < chars.length) {
+            chars[i].style.transition = 'opacity 60ms';
+            chars[i].style.opacity = '1';
             i++;
             setTimeout(next, DELAY);
           } else if (cb) {
@@ -1083,14 +1085,14 @@
         logo.style.opacity = '1';
 
         // Type SHORT
-        typeInto(left, 'SHORT', function() {
+        typeInto(left, null, function() {
           // Flash the square block in + trigger ripple
           fadeIn(mid, 200);
           triggerRipple();
 
           setTimeout(function() {
             // Type CIRCUIT
-            typeInto(right, 'CIRCUIT', function() {
+            typeInto(right, null, function() {
               // Fade in mission tagline
               fadeIn(mission, 400);
               // Then CTAs

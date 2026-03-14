@@ -842,13 +842,13 @@
         <span class="cn-line right"></span>
       </div>
 
-      <div class="hero-logo">
-        <span class="hl-left">SHORT</span>
-        <span class="hl-mid"><span class="hl-sq"></span></span>
-        <span class="hl-right">CIRCUIT</span>
+      <div class="hero-logo" id="hero-logo" style="opacity:0">
+        <span class="hl-left" id="tw-left"></span>
+        <span class="hl-mid" id="tw-mid" style="opacity:0"><span class="hl-sq"></span></span>
+        <span class="hl-right" id="tw-right"></span>
       </div>
 
-      <div class="hero-mission">
+      <div class="hero-mission" id="hero-mission" style="opacity:0">
         Engineering the Economic Systems of the <span class="ot">AI Age.</span>
       </div>
 
@@ -963,5 +963,63 @@
     </div>
   </footer>
 
+
+  <script>
+    (function() {
+      const logo = document.getElementById('hero-logo');
+      const left = document.getElementById('tw-left');
+      const mid  = document.getElementById('tw-mid');
+      const right= document.getElementById('tw-right');
+      const mission = document.getElementById('hero-mission');
+      const actions = document.querySelector('.hero-actions');
+      if (actions) actions.style.opacity = '0';
+
+      const DELAY  = 120;  // ms per character
+      const PAUSE  = 180;  // pause before next word
+
+      function typeInto(el, text, cb) {
+        let i = 0;
+        function next() {
+          if (i <= text.length) {
+            el.textContent = text.slice(0, i);
+            i++;
+            setTimeout(next, DELAY);
+          } else if (cb) {
+            setTimeout(cb, PAUSE);
+          }
+        }
+        next();
+      }
+
+      function fadeIn(el, duration) {
+        el.style.transition = 'opacity ' + (duration || 300) + 'ms ease';
+        el.style.opacity = '1';
+      }
+
+      // Sequence: show logo container → type SHORT → flash square → type CIRCUIT → fade mission → fade CTAs
+      setTimeout(function() {
+        logo.style.transition = 'opacity 50ms';
+        logo.style.opacity = '1';
+
+        // Type SHORT
+        typeInto(left, 'SHORT', function() {
+          // Flash the square block in
+          fadeIn(mid, 200);
+
+          setTimeout(function() {
+            // Type CIRCUIT
+            typeInto(right, 'CIRCUIT', function() {
+              // Fade in mission tagline
+              fadeIn(mission, 400);
+              // Then CTAs
+              setTimeout(function() {
+                if (actions) fadeIn(actions, 400);
+              }, 300);
+            });
+          }, 220);
+        });
+      }, 300);
+    })();
+  </script>
 </body>
 </html>

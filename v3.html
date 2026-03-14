@@ -33,6 +33,58 @@
       overflow-x: hidden;
     }
 
+
+    /* ── RIPPLE ───────────────────────────────────────── */
+    .ripple-origin {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ripple-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      border-radius: 50%;
+      border: 1px solid rgba(249,115,22,0.5);
+      background: radial-gradient(ellipse at center,
+        rgba(249,115,22,0.07) 0%,
+        transparent 70%
+      );
+      animation: ripple-expand 1.6s cubic-bezier(0.2, 0.6, 0.4, 1) forwards;
+      opacity: 0;
+    }
+    .ripple-ring:nth-child(1) { width: 400px; height: 280px; animation-delay: 0ms; }
+    .ripple-ring:nth-child(2) { width: 700px; height: 460px; animation-delay: 180ms; border-color: rgba(249,115,22,0.25); }
+    .ripple-ring:nth-child(3) { width: 1100px; height: 680px; animation-delay: 360ms; border-color: rgba(249,115,22,0.1); background: none; }
+
+    @keyframes ripple-expand {
+      0%   { transform: translate(-50%, -50%) scale(0);   opacity: 0.9; }
+      60%  { opacity: 0.4; }
+      100% { transform: translate(-50%, -50%) scale(1);   opacity: 0; }
+    }
+
+    /* Orange background wash that pulses once then settles */
+    .hero-wash {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 70% at 50% 50%,
+        rgba(249,115,22,0.09) 0%,
+        rgba(249,115,22,0.03) 50%,
+        transparent 75%
+      );
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-wash.active {
+      opacity: 1;
+    }
+
     /* ── NAV ──────────────────────────────────────────── */
     nav {
       position: fixed;
@@ -834,6 +886,8 @@
 
   <!-- HERO -->
   <div class="hero">
+    <div class="ripple-origin" id="ripple-origin"></div>
+    <div class="hero-wash" id="hero-wash"></div>
     <div class="hero-inner">
 
       <div class="circuit-node">
@@ -996,6 +1050,33 @@
         el.style.opacity = '1';
       }
 
+      function triggerRipple() {
+        var origin = document.getElementById('ripple-origin');
+        var wash   = document.getElementById('hero-wash');
+
+        // Create 3 rings
+        for (var i = 0; i < 3; i++) {
+          var ring = document.createElement('div');
+          ring.className = 'ripple-ring';
+          origin.appendChild(ring);
+        }
+
+        // Activate background wash
+        requestAnimationFrame(function() {
+          wash.classList.add('active');
+          // Settle back down after peak
+          setTimeout(function() {
+            wash.style.transition = 'opacity 2s ease';
+            wash.style.opacity = '0.35';
+          }, 600);
+        });
+
+        // Clean up rings after animation
+        setTimeout(function() {
+          origin.innerHTML = '';
+        }, 2200);
+      }
+
       // Sequence: show logo container → type SHORT → flash square → type CIRCUIT → fade mission → fade CTAs
       setTimeout(function() {
         logo.style.transition = 'opacity 50ms';
@@ -1003,8 +1084,9 @@
 
         // Type SHORT
         typeInto(left, 'SHORT', function() {
-          // Flash the square block in
+          // Flash the square block in + trigger ripple
           fadeIn(mid, 200);
+          triggerRipple();
 
           setTimeout(function() {
             // Type CIRCUIT

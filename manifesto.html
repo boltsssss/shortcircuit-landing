@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Manifesto — ShortCircuit</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -13,8 +13,7 @@
       --cream:  #F0EEE9;
       --dark:   #0d0d0d;
       --orange: #F97316;
-      --muted:  #9A9590;
-      --border: rgba(13,13,13,0.08);
+      --muted:  #aaa8a3;
       --mono:   'Space Mono', monospace;
     }
 
@@ -22,16 +21,15 @@
       background: var(--cream);
       color: var(--dark);
       font-family: var(--mono);
-      overflow-x: hidden;
+      min-height: 100vh;
     }
 
-    /* ── NAV ──────────────────────────────────────────── */
+    /* ── NAV — barely there ───────────────────────────── */
     nav {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 36px 60px;
-      border-bottom: 1px solid var(--border);
+      justify-content: center;
+      padding: 32px 24px 0;
     }
     .wordmark-block {
       display: inline-flex;
@@ -39,253 +37,134 @@
       text-decoration: none;
       font-family: var(--mono);
       font-weight: 700;
-      font-size: 12px;
+      font-size: 11px;
       letter-spacing: 0.08em;
       line-height: 1;
     }
     .wb-left, .wb-right {
       background: var(--dark);
       color: #fff;
-      padding: 7px 11px;
+      padding: 6px 10px;
       display: flex;
       align-items: center;
     }
     .wb-mid {
       background: var(--orange);
-      padding: 7px 9px;
+      padding: 6px 8px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
     .wb-sq {
-      width: 9px;
-      height: 9px;
-      border: 2px solid #fff;
+      width: 8px;
+      height: 8px;
+      border: 1.5px solid #fff;
       display: block;
-    }
-    .nav-label {
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
     }
 
     /* ── DOCUMENT ─────────────────────────────────────── */
     .doc {
-      max-width: 640px;
+      max-width: 560px;
       margin: 0 auto;
-      padding: 80px 40px 120px;
+      padding: 72px 32px 120px;
+      text-align: center;
     }
 
-    /* Doc header */
-    .doc-header {
-      margin-bottom: 72px;
-    }
-    .doc-eyebrow {
-      font-size: 10px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 40px;
-    }
-    .doc-meta {
-      margin-top: 32px;
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-    }
-
-    /* ── BEAT — big statement + quiet support ─────────── */
-    .beat {
-      margin-bottom: 0;
-    }
-
-    .beat-statement {
-      font-size: clamp(32px, 5vw, 52px);
+    .doc-title {
+      font-size: clamp(30px, 5.5vw, 52px);
       font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
       color: var(--dark);
-      margin-bottom: 24px;
-    }
-    .beat-statement .ot { color: var(--orange); }
-
-    .beat-support {
-      font-size: clamp(13px, 1.5vw, 15px);
-      font-weight: 400;
-      line-height: 2;
-      color: rgba(13,13,13,0.45);
-      max-width: 480px;
-    }
-    .beat-support .em {
-      color: rgba(13,13,13,0.75);
-      font-style: italic;
+      margin-bottom: 48px;
     }
 
-    /* ── DIVIDER ●──▢──● ──────────────────────────────── */
-    .node-divider {
-      display: flex;
-      align-items: center;
-      margin: 52px 0;
-    }
-    .nd-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: rgba(249,115,22,0.4);
-      flex-shrink: 0;
-    }
-    .nd-line {
-      width: 28px;
-      height: 1px;
-      background: rgba(13,13,13,0.12);
-    }
-    .nd-sq {
-      width: 8px;
-      height: 8px;
-      border: 1.5px solid rgba(249,115,22,0.45);
-      flex-shrink: 0;
-      margin: 0 2px;
+    .doc-p {
+      font-size: clamp(13px, 1.6vw, 15px);
+      line-height: 1.95;
+      margin-bottom: 36px;
     }
 
-    /* ── CLOSING ──────────────────────────────────────── */
-    .doc-close {
-      margin-top: 80px;
-      padding-top: 48px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .close-copy {
-      font-size: 11px;
+    .doc-p.muted {
       color: var(--muted);
-      letter-spacing: 0.06em;
     }
-    .close-cta {
-      font-size: 11px;
+
+    .doc-p .ot {
+      color: var(--orange);
+    }
+
+    .doc-closer {
+      font-size: clamp(12px, 1.4vw, 14px);
+      font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--dark);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: gap 0.2s;
+      margin-top: 52px;
+      margin-bottom: 48px;
     }
-    .close-cta:hover { gap: 16px; }
-    .close-cta::after { content: '→'; color: var(--orange); }
 
-    @media (max-width: 600px) {
-      nav { padding: 24px; }
-      .doc { padding: 72px 24px 100px; }
-      .doc-close { flex-direction: column; gap: 20px; align-items: flex-start; }
+    .doc-cta {
+      display: inline-block;
+      padding: 14px 40px;
+      border: 1px solid rgba(13,13,13,0.25);
+      color: var(--dark);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .doc-cta:hover {
+      border-color: var(--orange);
+      color: var(--orange);
     }
   </style>
 </head>
 <body>
 
   <nav>
-    <a href="/v2.html" class="wordmark-block">
+    <a href="/v3.html" class="wordmark-block">
       <span class="wb-left">SHORT</span>
       <span class="wb-mid"><span class="wb-sq"></span></span>
       <span class="wb-right">CIRCUIT</span>
     </a>
-    <span class="nav-label">Manifesto</span>
   </nav>
 
   <div class="doc">
 
-    <div class="doc-header">
-      <div class="doc-eyebrow">ShortCircuit · Founding Document · 2026</div>
-    </div>
+    <h1 class="doc-title">The World Runs<br>on Systems.</h1>
 
-    <!-- I -->
-    <div class="beat">
-      <div class="beat-statement">The world runs<br>on systems.</div>
-      <div class="beat-support">
-        Financial systems. Energy systems. Information systems.<br>
-        Most systems evolve slowly.<br>
-        <span class="em">But history does not.</span>
-      </div>
-    </div>
+    <p class="doc-p muted">
+      Financial systems.<br>
+      Energy systems.<br>
+      Information systems.
+    </p>
 
-    <div class="node-divider">
-      <span class="nd-dot"></span>
-      <span class="nd-line"></span>
-      <span class="nd-sq"></span>
-      <span class="nd-line"></span>
-      <span class="nd-dot"></span>
-    </div>
+    <p class="doc-p">
+      But most systems are <span class="ot">slow</span>.<br>
+      They evolve gradually.
+    </p>
 
-    <!-- II -->
-    <div class="beat">
-      <div class="beat-statement">Progress happens<br>through <span class="ot">short circuits.</span></div>
-      <div class="beat-support">
-        A short circuit bypasses the intended path.<br>
-        Electricity finds a faster route. Technology does the same.<br>
-        <span class="em">Every system, eventually, gets short-circuited.</span>
-      </div>
-    </div>
+    <p class="doc-p">
+      We believe progress happens differently.<br>
+      Through <span class="ot">short circuits</span>.
+    </p>
 
-    <div class="node-divider">
-      <span class="nd-dot"></span>
-      <span class="nd-line"></span>
-      <span class="nd-sq"></span>
-      <span class="nd-line"></span>
-      <span class="nd-dot"></span>
-    </div>
+    <p class="doc-p">
+      Moments where new technology bypasses<br>
+      the existing path and creates a faster one.
+    </p>
 
-    <!-- III -->
-    <div class="beat">
-      <div class="beat-statement">Intelligence is becoming<br><span class="ot">infrastructure.</span></div>
-      <div class="beat-support">
-        AI agents can now coordinate markets, execute financial strategies,<br>
-        manage infrastructure, run businesses.<br>
-        <span class="em">When intelligence becomes programmable, economic systems change.</span>
-      </div>
-    </div>
+    <p class="doc-p">
+      This is how the internet emerged.<br>
+      This is how crypto emerged.<br>
+      And this is how the next economic systems will emerge.
+    </p>
 
-    <div class="node-divider">
-      <span class="nd-dot"></span>
-      <span class="nd-line"></span>
-      <span class="nd-sq"></span>
-      <span class="nd-line"></span>
-      <span class="nd-dot"></span>
-    </div>
+    <div class="doc-closer">ShortCircuit exists to build them.</div>
 
-    <!-- IV -->
-    <div class="beat">
-      <div class="beat-statement">New economic systems<br>will <span class="ot">emerge.</span></div>
-      <div class="beat-support">
-        Markets will run themselves.<br>
-        Infrastructure will coordinate itself.<br>
-        Capital will move programmatically.<br>
-        <span class="em">The systems that enable this future are not companies. They are networks.</span>
-      </div>
-    </div>
-
-    <div class="node-divider">
-      <span class="nd-dot"></span>
-      <span class="nd-line"></span>
-      <span class="nd-sq"></span>
-      <span class="nd-line"></span>
-      <span class="nd-dot"></span>
-    </div>
-
-    <!-- V -->
-    <div class="beat">
-      <div class="beat-statement">ShortCircuit exists<br>to <span class="ot">build them.</span></div>
-      <div class="beat-support">
-        Not to observe disruption. Not to invest in it.<br>
-        <span class="em">To engineer it.</span>
-      </div>
-    </div>
-
-    <div class="doc-close">
-      <span class="close-copy">© 2026 ShortCircuit Ventures</span>
-      <a href="/v2.html" class="close-cta">Explore the Systems</a>
-    </div>
+    <a href="/v3.html" class="doc-cta">Explore Systems</a>
 
   </div>
 

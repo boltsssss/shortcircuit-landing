@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manifesto — ShortCircuit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream:  #F0EEE9;
+      --dark:   #0d0d0d;
+      --orange: #F97316;
+      --muted:  #9A9590;
+      --border: rgba(13,13,13,0.08);
+      --mono:   'Space Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--dark);
+      font-family: var(--mono);
+      font-weight: 400;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV — minimal ────────────────────────────────── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 36px 60px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .wordmark-block {
+      display: inline-flex;
+      align-items: stretch;
+      text-decoration: none;
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      line-height: 1;
+    }
+    .wb-left, .wb-right {
+      background: var(--dark);
+      color: #fff;
+      padding: 7px 11px;
+      display: flex;
+      align-items: center;
+    }
+    .wb-mid {
+      background: var(--orange);
+      padding: 7px 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wb-sq {
+      width: 9px;
+      height: 9px;
+      border: 2px solid #fff;
+      display: block;
+    }
+
+    .nav-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── DOCUMENT ─────────────────────────────────────── */
+    .doc {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 100px 40px 160px;
+    }
+
+    /* Doc header */
+    .doc-header {
+      margin-bottom: 100px;
+      padding-bottom: 60px;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .doc-eyebrow::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .doc-title {
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--dark);
+      margin-bottom: 20px;
+    }
+    .doc-title .ot { color: var(--orange); }
+    .doc-meta {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* Declaration sections */
+    .declaration {
+      margin-bottom: 80px;
+    }
+
+    .declaration-title {
+      font-size: clamp(28px, 4.5vw, 48px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      color: var(--dark);
+      margin-bottom: 32px;
+    }
+    .declaration-title .ot { color: var(--orange); }
+
+    .declaration-lines {
+      list-style: none;
+    }
+    .declaration-lines li {
+      font-size: clamp(15px, 1.8vw, 18px);
+      line-height: 2;
+      color: rgba(13,13,13,0.65);
+      padding: 2px 0;
+    }
+    .declaration-lines li.strong {
+      color: var(--dark);
+      font-weight: 700;
+    }
+    .declaration-lines li.ot {
+      color: var(--orange);
+      font-style: italic;
+    }
+    .declaration-lines li.indent {
+      padding-left: 24px;
+      font-size: clamp(13px, 1.5vw, 15px);
+      color: rgba(13,13,13,0.45);
+    }
+
+    /* Divider ●──▢──● */
+    .node-divider {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 72px 0;
+      color: rgba(13,13,13,0.18);
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: 0.05em;
+    }
+    .nd-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(249,115,22,0.35);
+      flex-shrink: 0;
+    }
+    .nd-line {
+      flex: 1;
+      max-width: 32px;
+      height: 1px;
+      background: rgba(13,13,13,0.15);
+    }
+    .nd-sq {
+      width: 8px;
+      height: 8px;
+      border: 1.5px solid rgba(249,115,22,0.5);
+      transform: rotate(0deg);
+      flex-shrink: 0;
+      margin: 0 2px;
+    }
+
+    /* Closing CTA */
+    .doc-close {
+      margin-top: 100px;
+      padding-top: 60px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .close-text {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+    .close-cta {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: gap 0.2s;
+    }
+    .close-cta:hover { gap: 16px; }
+    .close-cta::after {
+      content: '→';
+      color: var(--orange);
+    }
+
+    /* ── RESPONSIVE ───────────────────────────────────── */
+    @media (max-width: 600px) {
+      nav { padding: 24px; }
+      .doc { padding: 60px 24px 100px; }
+      .doc-close { flex-direction: column; gap: 20px; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MINIMAL NAV -->
+  <nav>
+    <a href="/v2.html" class="wordmark-block">
+      <span class="wb-left">SHORT</span>
+      <span class="wb-mid"><span class="wb-sq"></span></span>
+      <span class="wb-right">CIRCUIT</span>
+    </a>
+    <span class="nav-label">Manifesto</span>
+  </nav>
+
+  <!-- DOCUMENT -->
+  <div class="doc">
+
+    <!-- Header -->
+    <div class="doc-header">
+      <div class="doc-eyebrow">ShortCircuit · Founding Document</div>
+      <h1 class="doc-title">The World<br>Runs on<br><span class="ot">Systems.</span></h1>
+      <div class="doc-meta">Published 2026 &nbsp;·&nbsp; shortcircuit.ventures</div>
+    </div>
+
+    <!-- Declaration 1 -->
+    <div class="declaration">
+      <h2 class="declaration-title">The world runs<br>on systems.</h2>
+      <ul class="declaration-lines">
+        <li>Financial systems.</li>
+        <li>Energy systems.</li>
+        <li>Information systems.</li>
+        <li>&nbsp;</li>
+        <li>Most systems evolve slowly.</li>
+        <li class="strong">But history does not.</li>
+      </ul>
+    </div>
+
+    <div class="node-divider">
+      <span class="nd-dot"></span>
+      <span class="nd-line"></span>
+      <span class="nd-sq"></span>
+      <span class="nd-line"></span>
+      <span class="nd-dot"></span>
+    </div>
+
+    <!-- Declaration 2 -->
+    <div class="declaration">
+      <h2 class="declaration-title">Progress happens<br>through <span class="ot">short circuits.</span></h2>
+      <ul class="declaration-lines">
+        <li>A short circuit bypasses the intended path.</li>
+        <li>Electricity finds a faster route.</li>
+        <li>Technology does the same.</li>
+        <li>&nbsp;</li>
+        <li class="indent">The internet bypassed physical distribution.</li>
+        <li class="indent">Crypto bypassed institutional finance.</li>
+        <li class="indent">AI is bypassing human coordination.</li>
+        <li>&nbsp;</li>
+        <li class="strong">Every system gets short-circuited.</li>
+      </ul>
+    </div>
+
+    <div class="node-divider">
+      <span class="nd-dot"></span>
+      <span class="nd-line"></span>
+      <span class="nd-sq"></span>
+      <span class="nd-line"></span>
+      <span class="nd-dot"></span>
+    </div>
+
+    <!-- Declaration 3 -->
+    <div class="declaration">
+      <h2 class="declaration-title">Intelligence is becoming<br><span class="ot">infrastructure.</span></h2>
+      <ul class="declaration-lines">
+        <li>AI agents can now coordinate markets.</li>
+        <li>Execute financial strategies.</li>
+        <li>Manage infrastructure.</li>
+        <li>Run businesses.</li>
+        <li>&nbsp;</li>
+        <li class="strong">When intelligence becomes programmable,<br>&nbsp;&nbsp;economic systems change.</li>
+      </ul>
+    </div>
+
+    <div class="node-divider">
+      <span class="nd-dot"></span>
+      <span class="nd-line"></span>
+      <span class="nd-sq"></span>
+      <span class="nd-line"></span>
+      <span class="nd-dot"></span>
+    </div>
+
+    <!-- Declaration 4 -->
+    <div class="declaration">
+      <h2 class="declaration-title">New economic systems<br>will <span class="ot">emerge.</span></h2>
+      <ul class="declaration-lines">
+        <li>Markets will run themselves.</li>
+        <li>Infrastructure will coordinate itself.</li>
+        <li>Capital will move programmatically.</li>
+        <li>&nbsp;</li>
+        <li>The systems that enable this future</li>
+        <li>are not companies.</li>
+        <li class="strong">They are networks.</li>
+      </ul>
+    </div>
+
+    <div class="node-divider">
+      <span class="nd-dot"></span>
+      <span class="nd-line"></span>
+      <span class="nd-sq"></span>
+      <span class="nd-line"></span>
+      <span class="nd-dot"></span>
+    </div>
+
+    <!-- Declaration 5 — closing -->
+    <div class="declaration">
+      <h2 class="declaration-title">ShortCircuit exists<br>to <span class="ot">build them.</span></h2>
+      <ul class="declaration-lines">
+        <li>Not to observe disruption.</li>
+        <li>Not to invest in it.</li>
+        <li class="strong">To engineer it.</li>
+      </ul>
+    </div>
+
+    <!-- Closing CTA -->
+    <div class="doc-close">
+      <span class="close-text">© 2026 ShortCircuit Ventures</span>
+      <a href="/v2.html" class="close-cta">Explore the Systems</a>
+    </div>
+
+  </div>
+
+</body>
+</html>

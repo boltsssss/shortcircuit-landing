@@ -420,12 +420,7 @@
       font-style: italic;
     }
 
-    .systems-outer {
-      background: #fff;
-      width: 100%;
-    }
-
-    /* ── SYSTEMS GRID ─────────────────────────────────── */
+/* ── SYSTEMS GRID ─────────────────────────────────── */
     .systems-wrap {
       border: 1px dashed rgba(13,13,13,0.18);
       background: #fff;
@@ -436,7 +431,7 @@
       gap: 0;
     }
     .system-card {
-      background: #fafafa;
+      background: var(--cream);
       padding: 28px 28px 32px;
       position: relative;
       overflow: hidden;
@@ -456,7 +451,7 @@
       transition: background 0.4s;
       pointer-events: none;
     }
-    .system-card:hover { background: #F0EEE9; }
+    .system-card:hover { background: #E4E1DA; }
     .system-card:hover::after {
       background: radial-gradient(ellipse, rgba(249,115,22,0.18) 0%, transparent 65%);
     }
@@ -1177,8 +1172,7 @@
   </div>
 
   <!-- SYSTEMS -->
-  <div class="systems-outer" id="systems">
-  <div class="section-wrap">
+  <div class="section-wrap" id="systems">
     <div class="section-label"><span class="num">01</span> Current Systems</div>
     <h2 class="section-title">Not startups.<br>Infrastructure.</h2>
     <p class="section-sub">Each system is a circuit inside the network.</p>

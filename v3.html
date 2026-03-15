@@ -907,6 +907,84 @@
       background: rgba(255,255,255,0.1);
     }
 
+
+    /* ── BELIEF + FOR GOOD (dark) ─────────────────────── */
+    .dark-section {
+      background: #0d0d0d;
+      padding: 100px 48px;
+    }
+    .dark-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Belief cards grid */
+    .belief-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.07);
+      margin-top: 48px;
+      margin-bottom: 80px;
+    }
+    .belief-card {
+      background: #0d0d0d;
+      padding: 36px 32px;
+    }
+    .belief-num {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: rgba(249,115,22,0.6);
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+    .belief-q {
+      font-family: var(--mono);
+      font-size: clamp(15px, 1.7vw, 19px);
+      line-height: 1.6;
+      color: rgba(255,255,255,0.85);
+      font-weight: 400;
+    }
+    .belief-q .ot { color: var(--orange); font-style: italic; }
+
+    /* For Good band */
+    .for-good {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 64px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .fg-title {
+      font-family: var(--mono);
+      font-size: clamp(22px, 3vw, 36px);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+    .fg-quote {
+      border-left: 2px solid var(--orange);
+      padding-left: 24px;
+      font-family: var(--mono);
+      font-size: clamp(14px, 1.6vw, 17px);
+      font-style: italic;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.6);
+      align-self: center;
+    }
+    .fg-quote strong {
+      display: block;
+      color: rgba(255,255,255,0.9);
+      font-style: normal;
+      margin-top: 8px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
     /* ── FOOTER ───────────────────────────────────────── */
     footer {
       border-top: 1px solid var(--border);
@@ -1113,21 +1191,39 @@
 
 
 
-  <!-- CLOSING MANIFESTO -->
-  <div class="closing-manifesto">
-    <div class="cm-inner">
-      <div class="cm-left">
-        <div class="section-label section-label--dark"><span class="num">03</span> Our Belief</div>
-        <h2 class="cm-title">Every system<br>gets<br>short-circuited.</h2>
+  <!-- DARK SECTION: BELIEF + FOR GOOD -->
+  <div class="dark-section">
+    <div class="dark-inner">
+
+      <div class="section-label section-label--dark"><span class="num">03</span> What We Believe</div>
+
+      <div class="belief-grid">
+        <div class="belief-card">
+          <div class="belief-num">01</div>
+          <p class="belief-q">The best opportunities look like <span class="ot">bad ideas</span> until they don't.</p>
+        </div>
+        <div class="belief-card">
+          <div class="belief-num">02</div>
+          <p class="belief-q">We move at <span class="ot">startup speed.</span><br>We think at civilization scale.</p>
+        </div>
+        <div class="belief-card">
+          <div class="belief-num">03</div>
+          <p class="belief-q"><span class="ot">Ownership</span> is not a feature.<br>It's the product.</p>
+        </div>
+        <div class="belief-card">
+          <div class="belief-num">04</div>
+          <p class="belief-q">Technology should give people <span class="ot">sovereignty</span>, not dependency.</p>
+        </div>
       </div>
-      <div class="cm-right">
-        <ul class="cm-lines">
-          <li>Markets will run themselves.</li>
-          <li>Infrastructure will coordinate itself.</li>
-          <li>Capital will move programmatically.</li>
-          <li>The systems that enable this future are not companies. They are networks.</li>
-        </ul>
+
+      <div class="for-good">
+        <div class="fg-title">Technology should<br>work for everyone.</div>
+        <div class="fg-quote">
+          Every short circuit needs a ground.
+          <strong>— ShortCircuit, For Good</strong>
+        </div>
       </div>
+
     </div>
   </div>
 

@@ -1161,6 +1161,51 @@
       .layers-inner { padding: 72px 24px; }
       footer { padding: 24px; flex-direction: column; gap: 16px; text-align: center; }
     }
+
+  /* ── OUR BELIEF ── */
+  .belief-section {
+    padding: clamp(60px, 8vw, 100px) 0;
+  }
+  .belief-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 6vw, 100px);
+    align-items: start;
+    margin-top: 32px;
+  }
+  .belief-headline {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(28px, 3.8vw, 52px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: #F0EEE9;
+  }
+  .belief-item {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 8px;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(240,238,233,0.1);
+    align-items: start;
+  }
+  .belief-item:first-child { border-top: 1px solid rgba(240,238,233,0.1); }
+  .belief-dot {
+    font-family: 'Space Mono', monospace;
+    color: #F97316;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  .belief-text {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(13px, 1.4vw, 15px);
+    line-height: 1.65;
+    color: rgba(240,238,233,0.75);
+  }
+  @media (max-width: 768px) {
+    .belief-layout { grid-template-columns: 1fr; }
+  }
+
   </style>
 </head>
 <body>
@@ -1233,36 +1278,6 @@
   </div>
 
 
-  <!-- OUR BELIEF -->
-  <div style="background:#1a1714; width:100%;">
-  <div class="section-wrap belief-section">
-    <div class="section-label" style="color:rgba(240,238,233,0.5);"><span class="num" style="color:#F97316;">03</span> Our Belief</div>
-    <div class="belief-layout">
-      <div class="belief-left">
-        <h2 class="belief-headline">Every system<br>gets<br>short&#8209;circuited.</h2>
-      </div>
-      <div class="belief-right">
-        <div class="belief-item">
-          <span class="belief-dot">·</span>
-          <span class="belief-text">Markets will run themselves.</span>
-        </div>
-        <div class="belief-item">
-          <span class="belief-dot">·</span>
-          <span class="belief-text">Infrastructure will coordinate itself.</span>
-        </div>
-        <div class="belief-item">
-          <span class="belief-dot">·</span>
-          <span class="belief-text">Capital will move programmatically.</span>
-        </div>
-        <div class="belief-item">
-          <span class="belief-dot">·</span>
-          <span class="belief-text">The systems that enable this future are not companies. They are networks.</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-
   <!-- SYSTEMS -->
   <div style="background:#fff; width:100%;">
   <div class="section-wrap" id="systems">
@@ -1312,6 +1327,36 @@
         <span class="sf-text">The next system is already in motion.</span>
       </div>
     </div>
+  </div>
+
+  <!-- OUR BELIEF -->
+  <div style="background:#1a1714; width:100%;">
+  <div class="section-wrap belief-section">
+    <div class="section-label" style="color:rgba(240,238,233,0.5);"><span class="num" style="color:#F97316;">03</span> Our Belief</div>
+    <div class="belief-layout">
+      <div class="belief-left">
+        <h2 class="belief-headline">Every system<br>gets<br>short&#8209;circuited.</h2>
+      </div>
+      <div class="belief-right">
+        <div class="belief-item">
+          <span class="belief-dot">·</span>
+          <span class="belief-text">Markets will run themselves.</span>
+        </div>
+        <div class="belief-item">
+          <span class="belief-dot">·</span>
+          <span class="belief-text">Infrastructure will coordinate itself.</span>
+        </div>
+        <div class="belief-item">
+          <span class="belief-dot">·</span>
+          <span class="belief-text">Capital will move programmatically.</span>
+        </div>
+        <div class="belief-item">
+          <span class="belief-dot">·</span>
+          <span class="belief-text">The systems that enable this future are not companies. They are networks.</span>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 
   <!-- LAYER MODEL -->

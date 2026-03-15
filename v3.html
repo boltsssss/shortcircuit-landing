@@ -908,6 +908,28 @@
     }
 
 
+    .dark-band {
+      padding: 48px 48px !important;
+    }
+    .dark-band .belief-grid {
+      grid-template-columns: repeat(4, 1fr) !important;
+      margin-top: 28px !important;
+      margin-bottom: 0 !important;
+    }
+    .dark-band .belief-card {
+      border-bottom: none !important;
+      border-top: none !important;
+      border-right: 1px solid rgba(255,255,255,0.07);
+      padding: 0 28px 0 0 !important;
+    }
+    .dark-band .belief-card:first-child { padding-left: 0 !important; }
+    .dark-band .belief-card:last-child { border-right: none; }
+    .dark-band .belief-q {
+      font-size: 13px !important;
+      line-height: 1.6 !important;
+    }
+    .dark-band .section-label { margin-bottom: 0 !important; }
+
     /* ── BELIEF + FOR GOOD (dark) ─────────────────────── */
     .dark-section {
       background: #1a1714;
@@ -1167,7 +1189,7 @@
 
   <!-- LAYER MODEL -->
   <!-- WHAT WE BELIEVE -->
-  <div class="dark-section">
+  <div class="dark-section dark-band">
     <div class="dark-inner">
       <div class="section-label section-label--dark"><span class="num">02</span> What We Believe</div>
       <div class="belief-grid">

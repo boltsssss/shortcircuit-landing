@@ -74,6 +74,18 @@
     .hero-wash.active { opacity: 1; }
 
     /* ── NAV ──────────────────────────────────────────── */
+    .nav-wordmark {
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+    }
+    .nav-wordmark.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -1102,7 +1114,19 @@
 
     /* ── RESPONSIVE ───────────────────────────────────── */
     @media (max-width: 768px) {
-      nav { padding: 22px 24px; }
+      .nav-wordmark {
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+    }
+    .nav-wordmark.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    nav { padding: 22px 24px; }
       .nav-links { display: none; }
       .hero { padding: 100px 24px 80px; }
       .thesis { padding: 24px; }
@@ -1424,6 +1448,20 @@
         });
       }, 300);
     })();
+      // Hide nav logo until scrolled past hero
+      const navLogo = document.getElementById('nav-logo');
+      const hero = document.getElementById('hero');
+      function updateNavLogo() {
+        if (!hero || !navLogo) return;
+        const heroBottom = hero.getBoundingClientRect().bottom;
+        if (heroBottom <= 0) {
+          navLogo.classList.add('visible');
+        } else {
+          navLogo.classList.remove('visible');
+        }
+      }
+      window.addEventListener('scroll', updateNavLogo, { passive: true });
+      updateNavLogo();
   </script>
 </body>
 </html>

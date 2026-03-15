@@ -413,9 +413,9 @@
       transition: background 0.4s;
       pointer-events: none;
     }
-    .system-card:hover { background: #EBE9E3; }
+    .system-card:hover { background: #E4E1DA; border-left: 2px solid var(--orange); }
     .system-card:hover::after {
-      background: radial-gradient(ellipse, rgba(249,115,22,0.1) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(249,115,22,0.18) 0%, transparent 65%);
     }
     .card-node {
       width: 9px;
@@ -426,8 +426,8 @@
       transition: border-color 0.3s, box-shadow 0.3s;
     }
     .system-card:hover .card-node {
-      border-color: rgba(249,115,22,0.75);
-      box-shadow: 0 0 10px rgba(249,115,22,0.18);
+      border-color: var(--orange);
+      box-shadow: 0 0 16px 4px rgba(249,115,22,0.28);
     }
     .card-category {
       font-family: var(--mono);
@@ -455,11 +455,12 @@
       font-family: var(--mono);
       font-size: 10px;
       letter-spacing: 0.1em;
-      color: var(--muted);
+      color: var(--orange);
       opacity: 0;
-      transition: opacity 0.25s;
+      transition: opacity 0.25s, transform 0.25s;
+      transform: translateX(-4px);
     }
-    .system-card:hover .card-arrow { opacity: 1; }
+    .system-card:hover .card-arrow { opacity: 1; transform: translateX(0); }
 
     /* ── LAYER MODEL ──────────────────────────────────── */
     .layers-section {

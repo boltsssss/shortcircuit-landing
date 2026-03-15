@@ -967,6 +967,30 @@
     }
     .dark-band .section-label { margin-bottom: 0 !important; }
 
+    .sovereignty-strip {
+      margin-top: 56px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(13,13,13,0.1);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .sov-title {
+      font-family: var(--mono);
+      font-size: clamp(18px, 2vw, 24px);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--dark);
+    }
+    .sov-body {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      line-height: 1.75;
+      color: rgba(13,13,13,0.6);
+      font-style: italic;
+    }
+
     /* ── BELIEF + FOR GOOD (dark) ─────────────────────── */
     .dark-section {
       background: #1a1714;
@@ -1293,6 +1317,10 @@
         </div>
       </div>
     </div>
+      <div class="sovereignty-strip">
+        <div class="sov-title">Sovereignty by Design</div>
+        <div class="sov-body">More control over data, money, and future — not less. Built into the architecture from day one.</div>
+      </div>
   </div>
 
 

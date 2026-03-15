@@ -456,11 +456,18 @@
       background: radial-gradient(ellipse, rgba(249,115,22,0.18) 0%, transparent 65%);
     }
 
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 7px;
+      margin-bottom: 24px;
+    }
     .card-node {
       width: 9px;
       height: 9px;
       border: 1.5px solid rgba(249,115,22,0.4);
-      margin-bottom: 8px;
+      flex-shrink: 0;
       transition: border-color 0.3s, box-shadow 0.3s;
     }
     .card-node.live {
@@ -471,12 +478,6 @@
       border-color: var(--orange);
       box-shadow: 0 0 12px 3px rgba(249,115,22,0.25);
     }
-    .card-status-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 20px;
-    }
     .card-status-label {
       font-family: var(--mono);
       font-size: 9px;
@@ -484,9 +485,7 @@
       text-transform: uppercase;
       color: var(--orange);
     }
-    .card-status-label.building {
-      color: var(--muted);
-    }
+    .card-status-label.building { color: var(--muted); }
     .card-category {
       font-family: var(--mono);
       font-size: 9px;
@@ -1181,8 +1180,7 @@
       <div class="systems-grid">
 
         <div class="system-card">
-          <div class="card-node live"></div>
-          <div class="card-status-row"><span class="card-status-label">Live</span></div>
+          <div class="card-header"><span class="card-status-label">Live</span><div class="card-node live"></div></div>
           <div class="card-category">AI Operational Intelligence</div>
           <div class="card-name">Claw</div>
           <div class="card-desc">AI ops for modern teams — connecting data, decisions, and action in real time.</div>
@@ -1190,8 +1188,7 @@
         </div>
 
         <div class="system-card">
-          <div class="card-node live"></div>
-          <div class="card-status-row"><span class="card-status-label">Live</span></div>
+          <div class="card-header"><span class="card-status-label">Live</span><div class="card-node live"></div></div>
           <div class="card-category">Tokenized Infrastructure Markets</div>
           <div class="card-name">dAI Index</div>
           <div class="card-desc">Programmable exposure to decentralized AI infrastructure — deployed as ERC-4626 vaults.</div>
@@ -1199,8 +1196,7 @@
         </div>
 
         <div class="system-card">
-          <div class="card-node live"></div>
-          <div class="card-status-row"><span class="card-status-label">Live</span></div>
+          <div class="card-header"><span class="card-status-label">Live</span><div class="card-node live"></div></div>
           <div class="card-category">Tokenization · Real World Assets</div>
           <div class="card-name">Copper Meridian</div>
           <div class="card-desc">Sovereign-grade real-world assets brought on-chain — built for institutional capital.</div>
@@ -1208,8 +1204,7 @@
         </div>
 
         <div class="system-card">
-          <div class="card-node"></div>
-          <div class="card-status-row"><span class="card-status-label building">In Build</span></div>
+          <div class="card-header"><span class="card-status-label building">In Build</span><div class="card-node"></div></div>
           <div class="card-category">Autonomous Trading Agents</div>
           <div class="card-name">Lobster Arena</div>
           <div class="card-desc">Autonomous agents competing in open markets — programmable capital in action.</div>

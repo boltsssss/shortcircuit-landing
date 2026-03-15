@@ -716,7 +716,7 @@
       font-weight: 700;
       line-height: 1.25;
       letter-spacing: -0.02em;
-      color: var(--dark);
+      color: #fff;
       margin-bottom: 0;
     }
     .cm-right {
@@ -729,9 +729,9 @@
       font-family: 'Inter', sans-serif;
       font-size: 15px;
       line-height: 1.9;
-      color: rgba(13,13,13,0.6);
+      color: rgba(255,255,255,0.6);
       padding: 10px 0;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
       display: flex;
       align-items: baseline;
       gap: 12px;
@@ -744,6 +744,7 @@
       background: var(--orange);
       flex-shrink: 0;
       margin-bottom: 2px;
+      opacity: 0.8;
     }
     .cm-lines .cm-bold {
       font-family: var(--mono);
@@ -799,6 +800,16 @@
       letter-spacing: 0.1em;
       color: var(--muted);
       text-transform: uppercase;
+    }
+
+    .section-label--dark {
+      color: rgba(255,255,255,0.35);
+    }
+    .section-label--dark .num {
+      color: rgba(249,115,22,0.8);
+    }
+    .section-label--dark::after {
+      background: rgba(255,255,255,0.1);
     }
 
     /* ── FOOTER ───────────────────────────────────────── */
@@ -974,7 +985,7 @@
   <div class="closing-manifesto">
     <div class="cm-inner">
       <div class="cm-left">
-        <div class="section-label"><span class="num">05</span> Our Belief</div>
+        <div class="section-label section-label--dark"><span class="num">05</span> Our Belief</div>
         <h2 class="cm-title">Every system<br>gets<br>short-circuited.</h2>
       </div>
       <div class="cm-right">

@@ -387,21 +387,24 @@
     }
 
     /* ── SYSTEMS GRID ─────────────────────────────────── */
+    .systems-wrap {
+      border: 1px solid var(--border);
+    }
     .systems-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
     }
     .system-card {
       background: var(--cream);
-      padding: 40px 36px;
+      padding: 28px 28px 32px;
       position: relative;
       overflow: hidden;
       transition: background 0.3s;
       cursor: default;
+      border-right: 1px solid var(--border);
     }
+    .system-card:last-child { border-right: none; }
     .system-card::after {
       content: '';
       position: absolute;
@@ -417,49 +420,109 @@
     .system-card:hover::after {
       background: radial-gradient(ellipse, rgba(249,115,22,0.18) 0%, transparent 65%);
     }
-    .card-node {
-      width: 9px;
-      height: 9px;
-      border: 1px solid rgba(249,115,22,0.3);
-      margin-bottom: 28px;
-      transition: border-color 0.3s, box-shadow 0.3s;
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
     }
-    .system-card:hover .card-node {
-      border-color: var(--orange);
-      box-shadow: 0 0 16px 4px rgba(249,115,22,0.28);
+    .card-num {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
     }
+    .card-status {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .card-status.live { color: var(--orange); }
+    .card-status.building { color: var(--muted); }
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .live .status-dot { background: var(--orange); }
+    .building .status-dot { background: var(--muted); }
+
     .card-category {
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .card-name {
+      font-family: var(--mono);
+      font-size: clamp(20px, 2.2vw, 28px);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 14px;
+      color: var(--dark);
+      letter-spacing: -0.02em;
+    }
+    .card-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      line-height: 1.75;
+      color: rgba(13,13,13,0.72);
+      margin-bottom: 20px;
+    }
+    .card-link {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.2s, gap 0.2s;
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: opacity 0.25s, transform 0.25s, color 0.2s;
+    }
+    .card-link::after { content: '↗'; font-size: 10px; }
+    .system-card:hover .card-link { opacity: 1; transform: translateX(0); color: var(--orange); }
+
+    /* IN BUILD strip */
+    .systems-footer {
+      border-top: 1px solid var(--border);
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sf-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      flex-shrink: 0;
+    }
+    .sf-label {
       font-family: var(--mono);
       font-size: 9px;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--orange);
-      margin-bottom: 10px;
     }
-    .card-name {
+    .sf-text {
       font-family: var(--mono);
-      font-size: 17px;
-      font-weight: 700;
-      margin-bottom: 14px;
-      color: var(--dark);
+      font-size: 11px;
+      color: var(--muted);
+      margin-left: 4px;
     }
-    .card-desc {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      line-height: 1.85;
-      color: rgba(13,13,13,0.72);
-    }
-    .card-arrow {
-      margin-top: 28px;
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      color: var(--orange);
-      opacity: 0;
-      transition: opacity 0.25s, transform 0.25s;
-      transform: translateX(-4px);
-    }
-    .system-card:hover .card-arrow { opacity: 1; transform: translateX(0); }
 
     /* ── LAYER MODEL ──────────────────────────────────── */
     .layers-section {
@@ -953,27 +1016,58 @@
     <h2 class="section-title">Not startups.<br>Infrastructure.</h2>
     <p class="section-sub">Each system is a circuit inside the network.</p>
 
-    <div class="systems-grid">
-      <div class="system-card">
-        <div class="card-node"></div>
-        <div class="card-category">AI Operational Intelligence</div>
-        <div class="card-name">Claw</div>
-        <div class="card-desc">AI operational intelligence — connecting data, decisions, and action in real time.</div>
-        <div class="card-arrow">→ VIEW SYSTEM</div>
+    <div class="systems-wrap">
+      <div class="systems-grid">
+
+        <div class="system-card">
+          <div class="card-top">
+            <span class="card-num">01</span>
+            <span class="card-status live"><span class="status-dot"></span>Live</span>
+          </div>
+          <div class="card-category">Tokenization · AI Infra</div>
+          <div class="card-name">dAI<br>Index</div>
+          <div class="card-desc">The first decentralized AI index. Build, backtest, and tokenize custom indexes on AI infrastructure — deployed as ERC-4626 vaults.</div>
+          <a href="#" class="card-link">openw3b.io</a>
+        </div>
+
+        <div class="system-card">
+          <div class="card-top">
+            <span class="card-num">02</span>
+            <span class="card-status live"><span class="status-dot"></span>Live</span>
+          </div>
+          <div class="card-category">Tokenization · RWA</div>
+          <div class="card-name">Copper<br>Meridian</div>
+          <div class="card-desc">ShortCircuit's tokenization vertical. Sovereign-grade real-world assets brought on-chain — infrastructure investment vehicles built for institutional capital.</div>
+          <a href="#" class="card-link">sovereigncloud.io</a>
+        </div>
+
+        <div class="system-card">
+          <div class="card-top">
+            <span class="card-num">03</span>
+            <span class="card-status live"><span class="status-dot"></span>Live</span>
+          </div>
+          <div class="card-category">AI SaaS · Business Intel</div>
+          <div class="card-name">Claw for<br>Business</div>
+          <div class="card-desc">AI ops for modern teams. Connect your live data — Shopify, Analytics, Ads, Sheets — to an intelligence layer that actually knows your company.</div>
+          <a href="#" class="card-link">clawforbusiness.io</a>
+        </div>
+
+        <div class="system-card">
+          <div class="card-top">
+            <span class="card-num">04</span>
+            <span class="card-status live"><span class="status-dot"></span>Live</span>
+          </div>
+          <div class="card-category">AI Agents · DeFi</div>
+          <div class="card-name">Lobster<br>Arena</div>
+          <div class="card-desc">AI trading battle royale on Hyperliquid. Deploy an OpenClaw-powered lobster, compete in 7-day seasons. The market decides who survives.</div>
+          <a href="#" class="card-link">lobsterarena.gg</a>
+        </div>
+
       </div>
-      <div class="system-card">
-        <div class="card-node"></div>
-        <div class="card-category">Tokenized Infrastructure Markets</div>
-        <div class="card-name">dAI Index</div>
-        <div class="card-desc">Programmable exposure to decentralized AI infrastructure.</div>
-        <div class="card-arrow">→ VIEW SYSTEM</div>
-      </div>
-      <div class="system-card">
-        <div class="card-node"></div>
-        <div class="card-category">Autonomous Trading Agents</div>
-        <div class="card-name">Lobster Arena</div>
-        <div class="card-desc">Autonomous agents competing in open markets — programmable capital in action.</div>
-        <div class="card-arrow">→ VIEW SYSTEM</div>
+      <div class="systems-footer">
+        <span class="sf-dot"></span>
+        <span class="sf-label">In Build</span>
+        <span class="sf-text">The next system is already in motion.</span>
       </div>
     </div>
   </div>

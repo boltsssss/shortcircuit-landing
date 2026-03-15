@@ -1016,6 +1016,18 @@
       line-height: 1.6;
     }
 
+    .inline-belief {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-style: italic;
+      color: var(--muted);
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      line-height: 1.6;
+    }
+    .inline-belief .ot { color: var(--orange); font-style: normal; }
+
     /* ── FOOTER ───────────────────────────────────────── */
     footer {
       border-top: 1px solid var(--border);
@@ -1131,8 +1143,9 @@
         the niche, and ship products that challenge how things are supposed to work.
       </p>
       <p class="who-closer">
-        We're not waiting for the future.<br>We're building it.
+        We move at <span class="ot">startup speed.</span><br>We think at civilization scale.
       </p>
+      <p class="inline-belief">"The best opportunities look like <span class="ot">bad ideas</span> until they don't."</p>
       <div class="who-rule"></div>
     </div>
   </div>
@@ -1167,6 +1180,7 @@
           <div class="card-category">Tokenization · Real World Assets</div>
           <div class="card-name">Copper Meridian</div>
           <div class="card-desc">Sovereign-grade real-world assets brought on-chain — built for institutional capital.</div>
+          <div class="inline-belief" style="border-top:1px solid rgba(13,13,13,0.08); margin-top:16px; padding-top:14px;">"<span class="ot">Ownership</span> is not a feature. It's the product."</div>
           <div class="card-arrow">→ VIEW SYSTEM</div>
         </div>
 
@@ -1188,31 +1202,6 @@
   </div>
 
   <!-- LAYER MODEL -->
-  <!-- WHAT WE BELIEVE -->
-  <div class="dark-section dark-band">
-    <div class="dark-inner">
-      <div class="section-label section-label--dark"><span class="num">02</span> What We Believe</div>
-      <div class="belief-grid">
-        <div class="belief-card">
-          <div class="belief-num">01</div>
-          <p class="belief-q">The best opportunities look like <span class="ot">bad ideas</span> until they don't.</p>
-        </div>
-        <div class="belief-card">
-          <div class="belief-num">02</div>
-          <p class="belief-q">We move at <span class="ot">startup speed.</span><br>We think at civilization scale.</p>
-        </div>
-        <div class="belief-card">
-          <div class="belief-num">03</div>
-          <p class="belief-q"><span class="ot">Ownership</span> is not a feature.<br>It's the product.</p>
-        </div>
-        <div class="belief-card">
-          <div class="belief-num">04</div>
-          <p class="belief-q">Technology should give people <span class="ot">sovereignty</span>, not dependency.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="layers-section" id="layers">
     <div class="layers-inner">
       <div class="section-label"><span class="num">03</span> Architecture</div>
@@ -1258,6 +1247,7 @@
         <div class="fg-quote">
           Developing nations, underserved communities, the ones technology usually passes by. We fund these with the commercial work, and we build them with the same intensity.
           <strong>"Every short circuit needs a ground."</strong>
+          <em style="display:block; margin-top:16px; font-size:12px; color:rgba(255,255,255,0.35); font-style:italic;">Technology should give people sovereignty, not dependency.</em>
         </div>
       </div>
     </div>
